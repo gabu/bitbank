@@ -19,6 +19,7 @@ type Client struct {
 	PrivateBaseURL *url.URL
 	// Services
 	Ticker *TickerService
+	Pubnub *PubnubService
 }
 
 type BaseResponseJSON struct {
@@ -33,6 +34,7 @@ func NewClient() *Client {
 
 	c := &Client{PublicBaseURL: publicBaseURL, PrivateBaseURL: privateBaseURL}
 	c.Ticker = &TickerService{client: c}
+	c.Pubnub = NewPubnubService(c)
 
 	return c
 }

@@ -52,6 +52,14 @@ func (p *PubnubService) Connect() {
 	p.pubnub = messaging.NewPubnub("", "sub-c-e12e9174-dd60-11e6-806b-02ee2ddab7fe", "", "", false, "", nil)
 }
 
+func (p *PubnubService) Disconnect() error {
+	if p.pubnub == nil {
+		return nil
+	}
+	p.pubnub.Abort()
+	return nil
+}
+
 func (p *PubnubService) AddSubscribe(channel string, pair string, c chan Tick) {
 	s := subscribeToChannel{
 		Channel: channel + pair,

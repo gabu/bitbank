@@ -2,7 +2,6 @@ package bitbank
 
 import (
 	"fmt"
-	"math"
 	"time"
 )
 
@@ -20,9 +19,9 @@ type Tick struct {
 	Timestamp int64
 }
 
-func (t *Tick) ParseTime() (*time.Time, error) {
-	time := time.Unix(t.Timestamp/1000, int64(math.Mod(float64(t.Timestamp), 1000))*1000000)
-	return &time, nil
+func (t *Tick) ParseTime() time.Time {
+	tt := time.Unix(0, int64(time.Millisecond)*t.Timestamp)
+	return tt
 }
 
 // https://docs.bitbank.cc/#!/Ticker/ticker
